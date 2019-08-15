@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { RingLoader } from 'react-spinners';
 import fetch from 'node-fetch';
 import GamesList from './GamesList';
 import CompList from './CompList';
@@ -15,21 +16,36 @@ function App() {
   }
 
   useEffect( () => {
-      getGameData();
+    setTimeout(() => {
+        getGameData();
+      }, 1000);
     }, [])
 
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Lists etc!</h1>
-      </header>
-      <div>
-        <GamesList/>
-        <CompList/>
+  if (gameData) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <h1>Lists etc!</h1>
+        </header>
+        <div>
+          <GamesList teamData={gameData.teams}/>
+          <CompList compData={gameData.competitions}/>
+        </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <RingLoader 
+          sizeUnit={"em"}
+          size={15}
+          color={"white"}
+          />
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
