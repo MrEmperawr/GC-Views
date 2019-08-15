@@ -1,2 +1,2 @@
 # GC-Views
-Views for Games and Competitions!
+A React App with views for Games and Competitions!
