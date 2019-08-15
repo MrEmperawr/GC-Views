@@ -1,11 +1,10 @@
 import React from 'react';
 import './css/GamesList.css';
 
-function GamesList() {
+function GamesList(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
+    <div className="GamesList">
+      This is where the Games will go. Oh muh lawd :o 
     </div>
   );
 }

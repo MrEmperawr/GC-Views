@@ -1,11 +1,10 @@
 import React from 'react';
-import './CompList.css';
+import './css/CompList.css';
 
-function CompList() {
+function CompList(props) {
   return (
-    <div className="App">
-      <header className="App-header">
-      </header>
+    <div className="GamesList">
+      This is where the Competitions will be. Crazy that huh :o
     </div>
   );
 }
