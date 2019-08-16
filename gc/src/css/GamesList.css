@@ -7,3 +7,7 @@
   list-style: none;
 }
 
+.GamesList-header {
+  display: flex;
+  justify-content: space-between;
+}

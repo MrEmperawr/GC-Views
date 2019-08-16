@@ -59,6 +59,9 @@ function GamesList(props) {
         </div>
         {team && true ? 
           <ul>
+          <div className="GamesList-header">
+            <p>Time</p> <p>Game</p> <p>Location</p>
+          </div>
           {console.log(currentGameListData)}
             {currentGameListData.map(matchData =>
               matchData.map(data => 
