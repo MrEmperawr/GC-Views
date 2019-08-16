@@ -27,16 +27,16 @@ function App() {
         <header className="App-header">
           <h1>Lists etc!</h1>
         </header>
-        <div>
-          <GamesList teamData={gameData.teams}/>
-          <CompList compData={gameData.competitions}/>
+        <div className="App-ListContainer">
+          <GamesList teams={gameData.teams}/>
+          <CompList comps={gameData.competitions}/>
         </div>
       </div>
     );
   } else {
     return (
       <div className="App">
-        <header className="App-header">
+        <header className="App-header-loader">
           <RingLoader 
           sizeUnit={"em"}
           size={15}
