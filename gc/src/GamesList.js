@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import TeamMatchList from './TeamMatchList';
 import './css/GamesList.css';
 
 function GamesList(props) {
-  const [team, setTeam] = useState(false);
+  const [team, setTeam] = useState(null);
   const [teamListClicked, setTeamListClicked] = useState(false)
+  const [currentGameListData, setCurrentGameListData] = useState(null)
   const teamList = Object.keys(props.teams)
     .map(key => props.teams[key].team)
   
@@ -12,36 +14,65 @@ function GamesList(props) {
     setTeamListClicked(!teamListClicked);
   }
 
-  const showTeamGames = () => {
-    setTeam()
+  const showTeamGames = (teamName) => {
+    setTeam(teamName)
   }
+
+  useEffect(() => {
+    const teams = Object.keys(props.teams).map(key => props.teams[key]);
+    let currentGameListData = teams
+      .filter(thisTeam => thisTeam.team === team)
+      .map(teamData => teamData.match)
+    setCurrentGameListData(currentGameListData);
+
+  }, [team])
+
+  useEffect(() => {
+
+  }, [teamListClicked])
 
   if (!teamListClicked) return (
     <div className="GamesList">
-      {console.log(teamListClicked)}
       <div 
         className="GamesList-slectionField"
         onClick={showTeamList}>Choose Team</div>
     </div>
   );
 
-  if (teamListClicked) return (
+  if (teamListClicked) 
+    return (
     <div className="GamesList">
-      {console.log(teamList)}
       <div 
         className="GamesList-slectionField">
           <ul>
             {teamList
-            .map(team =>
+            .map(teamName =>
             <li 
-              id={team} 
+              key={teamName} 
               className="GamesList-List"
-              onClick={showTeamGames}>
-              {team}
+              onClick={() => {
+                showTeamGames(teamName)}}>
+              {teamName}
             </li>
             )}
           </ul>
         </div>
+        {team && true ? 
+          <ul>
+          {console.log(currentGameListData)}
+            {currentGameListData.map(matchData =>
+              matchData.map(data => 
+              <li 
+              className="GamesList-Game"
+              key={data.fmid}>
+                <p>{data.time}</p>
+                <p>{data.team2.val} - {data.team1.val}</p>
+                <p>{data.venue}</p>
+              </li>
+              )
+            )}
+          </ul> 
+          : <div></div>}
     </div>
   );
 }
